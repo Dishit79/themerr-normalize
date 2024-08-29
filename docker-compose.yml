@@ -3,10 +3,9 @@ services:
     image: themerr-normalize
     container_name: themerr-normalize
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - SLEEP_DURATION=43200
       - MEDIA_PATH=/media
     volumes:
       - ${MEDIA_PATH}:/media
+    user: ${PUID}:${PGID}
     restart: unless-stopped

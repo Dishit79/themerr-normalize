@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install python-dotenv
+RUN apk add ffmpeg
+RUN pip install -r requirements.txt
 
 ENV MEDIA_PATH= \
  SLEEP_DURATION=43200

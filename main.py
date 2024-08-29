@@ -3,11 +3,13 @@ import json
 import subprocess
 import datetime
 import time
+import logging
 
 import dotenv
 from dotenv import load_dotenv
 
 load_dotenv()
+logging.basicConfig(level=logging.INFO)
 
 def get_media_files_from_settings():
     """
@@ -37,7 +39,9 @@ def enumerate_through_media_paths(media_paths):
                     # by checking for the existence of the
                     # themerr-normalize.json file.
                     if check_if_normalized(root):
-                        print(root, 'already normalized')
+
+                        logtxt = f'{root} already normalized'
+                        logging.info(logtxt)
                         continue
                     else:
                         normalize_theme_files(root)
@@ -70,7 +74,9 @@ def normalize_theme_files(path):
     Args:
         path (str): The path to the directory to normalize
     """
-    print(f'normalizing {path}')
+
+    logtxt = f'normalizing {path}'
+    logging.info(logtxt)
 
     # Normalize the theme.mp3 file
     normalize_audio(os.path.join(path, 'theme.mp3'))
@@ -108,7 +114,8 @@ def normalize_audio(path):
 
     # Delete the original file
     os.remove(renamed_path)
-    print(f'Completed {path}')
+    logtxt = f'Normalized {path}'
+    logging.info(logtxt)
 
 def stamp_audio(path):
     """
@@ -139,5 +146,6 @@ def main():
 while True:
     main()
     sleep_timer = os.environ.get('SLEEP_DURATION')
-    print('Sleeping for', sleep_timer, 'seconds')
+    logtxt = f'Sleeping for {sleep_timer} seconds'
+    logging.info(logtxt)
     time.sleep(int(sleep_timer))

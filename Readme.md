@@ -27,12 +27,13 @@ or use the docker-compose.yml
 ```docker-compse
 services:
   themerr-normalize:
-    image: themerr-normalize
+    image: ghcr.io/dishit79/themerr-normalize:latest
     container_name: themerr-normalize
     environment:
       - SLEEP_DURATION=43200
       - MEDIA_PATH=/media
     volumes:
-      - /home/nawaf/Documents/media/:/media
+      - ${MEDIA_PATH}:/media
+    user: ${PUID}:${PGID}
     restart: unless-stopped
 ```

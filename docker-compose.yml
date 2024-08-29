@@ -1,6 +1,6 @@
 services:
   themerr-normalize:
-    image: themerr-normalize
+    image: ghcr.io/dishit79/themerr-normalize:latest
     container_name: themerr-normalize
     environment:
       - SLEEP_DURATION=43200

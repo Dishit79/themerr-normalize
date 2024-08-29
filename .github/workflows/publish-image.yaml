@@ -1,0 +1,15 @@
+name: Docker Image
+
+on:
+  push:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and push image
+          run: |
+            docker login -u Dishit79 -p ${{ secrets.GH_PAT }} ghcr.io
+            docker build -t ghcr.io/dishit79/themerr-normalize:latest .
+            docker push ghcr.io/dishit79/themerr-normalize
